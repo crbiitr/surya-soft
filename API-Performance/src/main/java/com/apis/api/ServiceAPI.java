@@ -42,7 +42,7 @@ public class ServiceAPI {
         return null;
     }
 
-    public static void getPercentileMeanStd(List<Integer> getMethodResponseTime, PerformanceReport reportResponse) {
+    public void getPercentileMeanStd(List<Integer> getMethodResponseTime, PerformanceReport reportResponse) {
         // Get a DescriptiveStatistics instance
         DescriptiveStatistics stats = new DescriptiveStatistics();
 

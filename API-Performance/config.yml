@@ -4,5 +4,5 @@ logging:
     com.example.apiperf: DEBUG
 
 # Service URL
-url:
-  requesturl: http://surya-interview.appspot.com/message
+#url:
+#  requesturl: http://surya-interview.appspot.com/message

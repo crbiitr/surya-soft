@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by user on 9/4/16.
  */
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PerformanceReport {
     @JsonProperty("Percentile10")

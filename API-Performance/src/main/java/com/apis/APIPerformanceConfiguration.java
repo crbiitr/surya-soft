@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.*;
 import javax.validation.constraints.*;
 
 public class APIPerformanceConfiguration extends Configuration {
+/*
 
     @NotEmpty
     String requestUrl;
@@ -20,4 +21,6 @@ public class APIPerformanceConfiguration extends Configuration {
     public void setRequestUrl(String requestUrl) {
         this.requestUrl = requestUrl;
     }
+*/
+
 }

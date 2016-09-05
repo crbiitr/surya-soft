@@ -7,7 +7,7 @@ import io.dropwizard.setup.Environment;
 
 public class APIPerformanceApplication extends Application<APIPerformanceConfiguration> {
 
-    public static void main(final String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         new APIPerformanceApplication().run(args);
     }
 
@@ -17,12 +17,12 @@ public class APIPerformanceApplication extends Application<APIPerformanceConfigu
     }
 
     @Override
-    public void initialize(final Bootstrap<APIPerformanceConfiguration> bootstrap) {
+    public void initialize(Bootstrap<APIPerformanceConfiguration> bootstrap) {
     }
 
     @Override
-    public void run(final APIPerformanceConfiguration configuration,
-                    final Environment environment) {
+    public void run(APIPerformanceConfiguration configuration,
+                    Environment environment) {
 
         MessageResource resource = new MessageResource();
         environment.jersey().register(resource);
