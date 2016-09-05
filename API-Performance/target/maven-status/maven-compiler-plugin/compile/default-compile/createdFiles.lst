@@ -1,0 +1,8 @@
+com/apis/pojo/GetStats.class
+com/apis/pojo/PerformanceReport.class
+com/apis/pojo/Message.class
+com/apis/resources/MessageResource.class
+com/apis/APIPerformanceConfiguration.class
+com/apis/api/ServiceAPI.class
+com/apis/APIPerformanceApplication.class
+com/apis/core/WorkerThread.class

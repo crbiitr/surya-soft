@@ -1,0 +1,8 @@
+logging:
+  level: INFO
+  loggers:
+    com.example.apiperf: DEBUG
+
+# Service URL
+url:
+  requesturl: http://surya-interview.appspot.com/message
