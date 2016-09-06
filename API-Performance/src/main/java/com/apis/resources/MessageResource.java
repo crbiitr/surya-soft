@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by Chetan on 9/4/16.
+ * Created by Chetan
  */
 
 @Path("/")
@@ -18,11 +18,15 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MessageResource {
 
+    public String url;
+    public MessageResource(String url) {
+        this.url = url;
+    }
     @GET
     @Path("/performance-test")
     public Response performanceTest() {
         ServiceAPI service = new ServiceAPI();
-        Response response = service.call();
+        Response response = service.call(url);
         return response;
     }
 }

@@ -7,71 +7,66 @@
     <modelVersion>4.0.0</modelVersion>
     <prerequisites>
         <maven>3.0.0</maven>
-   </prerequisites>
+    </prerequisites>
 
-   <groupId>com.example.apiperf</groupId>
-   <artifactId>API-Performance</artifactId>
-   <version>1.0-SNAPSHOT</version>
-   <packaging>jar</packaging>
+    <groupId>com.example.apiperf</groupId>
+    <artifactId>API-Performance</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-   <name>APIPerformance</name>
+    <name>APIPerformance</name>
 
-   <properties>
-       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-       <dropwizard.version>1.0.0</dropwizard.version>
-       <mainClass>com.apis.APIPerformanceApplication</mainClass>
-       <jackson.version>2.3.3</jackson.version>
-   </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <dropwizard.version>1.0.0</dropwizard.version>
+        <mainClass>com.apis.APIPerformanceApplication</mainClass>
+        <jackson.version>2.3.3</jackson.version>
+        <slf4jVersion>1.7.21</slf4jVersion>
+    </properties>
 
-   <dependencyManagement>
-       <dependencies>
+    <dependencyManagement>
+        <dependencies>
 
-           <dependency>
-               <groupId>io.dropwizard</groupId>
-               <artifactId>dropwizard-bom</artifactId>
-               <version>${dropwizard.version}</version>
-               <type>pom</type>
-               <scope>import</scope>
-           </dependency>
-       </dependencies>
-   </dependencyManagement>
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-bom</artifactId>
+                <version>${dropwizard.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-   <dependencies>
-       <dependency>
-           <groupId>io.dropwizard</groupId>
-           <artifactId>dropwizard-core</artifactId>
-       </dependency>
-       <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
-       <dependency>
-           <groupId>org.apache.commons</groupId>
-           <artifactId>commons-math3</artifactId>
-           <version>3.0</version>
-       </dependency>
-       <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependencies>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-core</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.5.3</version>
+            <version>2.7.3</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.5.3</version>
+            <version>2.7.3</version>
         </dependency>
-       <dependency>
-           <groupId>io.fabric8.quickstarts</groupId>
-           <artifactId>vertx-simplest</artifactId>
-           <version>2.2.131</version>
-       </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.7.3</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
@@ -79,6 +74,13 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4jVersion}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -132,10 +134,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                <!--
-                    <source>1.8</source>
-                    <target>1.8</target>
-                -->
+                    <!--
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    -->
                 </configuration>
             </plugin>
 

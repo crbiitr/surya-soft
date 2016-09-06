@@ -4,6 +4,8 @@ import com.apis.core.WorkerThread;
 import com.apis.pojo.GetStats;
 import com.apis.pojo.PerformanceReport;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 import java.util.LinkedList;
@@ -12,45 +14,42 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by Chetan on 9/4/16.
+ * Created by Chetan
  */
 public class ServiceAPI {
+    private static Logger logger = LoggerFactory.getLogger(ServiceAPI.class);
     PerformanceReport getReport = new PerformanceReport();
     PerformanceReport postReport = new PerformanceReport();
     GetStats stats = new GetStats();
 
-    public Response call() {
+    public Response call(String url) {
         ExecutorService executor = Executors.newFixedThreadPool(10);//creating a pool of 5 threads
         List<Integer> getMethodResponseTime = new LinkedList<Integer>();
         List<Integer> postMethodResponseTime = new LinkedList<Integer>();
         for (int i = 0; i < 100; i++) {
-            Runnable worker = new WorkerThread(getMethodResponseTime, postMethodResponseTime);
+            Runnable worker = new WorkerThread(getMethodResponseTime, postMethodResponseTime, url);
             executor.execute(worker);//calling execute method of ExecutorService
         }
         executor.shutdown();
         while (!executor.isTerminated()) {
         }
-        System.out.println("postMethodResponseTime = " + postMethodResponseTime);
-        System.out.println("getMethodResponseTime = " + getMethodResponseTime);
-        System.out.println("Finished all threads");
+        logger.info("postMethodResponseTime = " + postMethodResponseTime);
+        logger.info("getMethodResponseTime = " + getMethodResponseTime);
+        logger.info("Finished all threads");
 
         getPercentileMeanStd(getMethodResponseTime,getReport);
         getPercentileMeanStd(postMethodResponseTime,postReport);
         stats.setGetPerformanceReport(getReport);
         stats.setPostPerformanceReport(postReport);
-
-        return null;
+        return Response.status(200).entity(stats).build();
     }
 
     public void getPercentileMeanStd(List<Integer> getMethodResponseTime, PerformanceReport reportResponse) {
-        // Get a DescriptiveStatistics instance
         DescriptiveStatistics stats = new DescriptiveStatistics();
-
-        // Add the data from the array
+        // Add the data from the List
         for( int i = 0; i < getMethodResponseTime.size(); i++) {
             stats.addValue(getMethodResponseTime.get(i));
         }
-
         // Computing statistics
         double mean = stats.getMean();
         double std = stats.getStandardDeviation();
@@ -67,7 +66,6 @@ public class ServiceAPI {
         reportResponse.setPercentile90(percentile90);
         reportResponse.setPercentile95(percentile95);
         reportResponse.setPercentile99(percentile99);
-
     }
 
 }

@@ -1,7 +1,7 @@
 package com.apis.pojo;
 
 /**
- * Created by user on 9/4/16.
+ * Created by Chetan
  */
 public class Message {
     private String emailId;

@@ -1,8 +1,12 @@
+url: http://surya-interview.appspot.com/message
+
 logging:
   level: INFO
   loggers:
-    com.example.apiperf: DEBUG
+    com.apis: DEBUG
 
-# Service URL
-#url:
-#  requesturl: http://surya-interview.appspot.com/message
+logging:
+  level: INFO
+  loggers:
+    org.skife.jdbi.v2: TRACE
+

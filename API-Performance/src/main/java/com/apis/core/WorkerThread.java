@@ -13,37 +13,38 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import com.apis.pojo.Message;
+import org.slf4j.LoggerFactory;
 
 /**
- * Created by Chetan on 9/4/16.
+ * Created by Chetan
  */
 public class WorkerThread implements Runnable {
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(WorkerThread.class);
     List<Integer> getMethodResponseTime;
     List<Integer> postMethodResponseTime;
+    String url;
 
-    public WorkerThread(List<Integer> getMethodResponseTime, List<Integer> postMethodResponseTime) {
+    public WorkerThread(List<Integer> getMethodResponseTime, List<Integer> postMethodResponseTime, String url) {
         this.getMethodResponseTime = getMethodResponseTime;
         this.postMethodResponseTime = postMethodResponseTime;
+        this.url = url;
     }
 
     @Override
     public void run() {
         try {
             Message message = getMessage();
-            System.out.println("message = " + message);
+            logger.info("message: " + message);
             int resultStatusCode = postMessage(message);
+            logger.info("Response Code: " + resultStatusCode);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private int postMessage(Message message) throws Exception {
-        String url = "http://surya-interview.appspot.com/message";
-
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(url);
-
-
         StringEntity postingString = new StringEntity(new ObjectMapper().writeValueAsString(message));
         post.setEntity(postingString);
 
@@ -51,17 +52,16 @@ public class WorkerThread implements Runnable {
         long startTime = System.currentTimeMillis();
         HttpResponse response = client.execute(post);
         long elapsedTime = System.currentTimeMillis() - startTime;
-        System.out.println("Total elapsed POST http request/response time in milliseconds: " + elapsedTime);
+        logger.info("Total elapsed POST http request/response time in milliseconds: " + elapsedTime);
 
         int responseCode = response.getStatusLine().getStatusCode();
         postMethodResponseTime.add((int) elapsedTime);
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
-        return 0;
+        logger.info("\nSending 'POST' request to URL : " + url);
+        logger.info("Response Code : " + responseCode);
+        return responseCode;
     }
 
     private Message getMessage() throws Exception {
-        String url = "http://surya-interview.appspot.com/message";
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
 
@@ -69,9 +69,9 @@ public class WorkerThread implements Runnable {
         long startTime = System.currentTimeMillis();
         HttpResponse response = client.execute(request);
         long elapsedTime = System.currentTimeMillis() - startTime;
-        System.out.println("Total elapsed GET http request/response time in milliseconds: " + elapsedTime);
+        logger.info("Total elapsed GET http request/response time in milliseconds: " + elapsedTime);
         getMethodResponseTime.add((int) elapsedTime);
-        System.out.println("Response Code : "
+        logger.info("Response Code : "
                 + response.getStatusLine().getStatusCode());
 
         BufferedReader rd = new BufferedReader(
